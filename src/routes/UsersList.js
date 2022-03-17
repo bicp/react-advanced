@@ -1,10 +1,18 @@
+import { useNavigate } from "react-router-dom";
+
 export function UsersList({ users }) {
-  console.log(users);
+  const navigate = useNavigate()
   return (
-    <div>
+    <ul className="list">
       {users.map((user) => (
-        <li>{user.firstname}</li>
+        <li key={user.id} className="list__user">
+          <div style={{ display: "flex", gap: "10px" }}>
+            <span>{user.firstname}</span>
+            <span>{user.lastname}</span>
+          </div>
+          <button onClick={() => navigate(`/user-details/${user.id}`)}>Edit</button>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

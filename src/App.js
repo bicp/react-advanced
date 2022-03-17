@@ -1,9 +1,7 @@
 import "./App.css";
-import { Collipsible } from "./components/Collipsible";
-import { Route, Router, Routes } from "react-router-dom";
-import { Section } from "./components/Section";
+import { Route, Navigate, Routes } from "react-router-dom";
 import { UsersList } from "./routes/UsersList";
-import { Posts } from "./routes/Posts";
+import { UserDetails } from "./routes/UserDetails";
 import { useState } from "react";
 
 const users_db = [
@@ -30,14 +28,21 @@ const users_db = [
   },
 ];
 
+const posts_db = [
+  {id: '1', title: "title1", description: "description1"},
+  {id: '2', title: "title2", description: "description2"},
+  {id: '3', title: "title3", description: "description3"},
+]
+
 function App() {
   const [users, setUsers] = useState(users_db);
   return (
     <div className="app">
       <h1>welcome</h1>
       <Routes>
-        <Route path="/home" element={<UsersList users={users} />} />
-        <Route path="/posts" element={<Posts />} />
+        <Route path="/" element={<Navigate to="/users-list" />} />
+        <Route path="/users-list" element={<UsersList users={users} />} />
+        <Route path="/user-details/:id" element={<UserDetails users={users} />} />
       </Routes>
     </div>
   );
